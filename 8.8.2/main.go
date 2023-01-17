@@ -6,21 +6,30 @@ import (
 )
 
 func main() {
-	BMW := Au.ConstructAuto("bmw", "x", 5, 4, 2, 362, 130)
-	Dodge := Au.ConstructAuto("Dodge", "Avenger", 6, 4, 1.8, 291, 160)
-
+	BMW := Au.ConstructAuto("bmw", "x", 5000, 4000, 2000, 362, 130)
+	Dodge := Au.ConstructAuto("Dodge", "Avenger", 6000, 4000, 1800, 291, 160)
+	Mercedes := Au.ConstructAuto("Mercedes", "c200", 5000, 400, 23000, 287, 150)
 	printAuto(BMW)
 	printAuto(Dodge)
+	printAuto(Mercedes)
 }
 
-func printAuto(auto Au.Auto, dim Au.Dimensions) {
+func printAuto(aut Au.Auto) {
 
-	fmt.Println(auto.Brand(), auto.Model(), auto.EnginePower(), auto.MaxSpeed(), dim.Width(), dim.Length(), dim.Height())
+	fmt.Println(aut.Brand(), aut.Model(), aut.EnginePower(), aut.MaxSpeed())
 
-	switch Au.Auto.Brand(auto) {
+	switch aut.Brand() {
 	case "Dodge":
-		fmt.Println(dim.Width().Get(Au.Inch), dim.Length().Get(Au.Inch), dim.Width().Get(Au.Inch))
+		aut, ok := aut.(Au.Dimensions)
+		if ok {
+			fmt.Println(aut.Width().Get(Au.Inch), aut.Length().Get(Au.Inch), aut.Width().Get(Au.Inch))
+		}
+
 	default:
-		fmt.Println(dim.Width().Get(Au.CM), dim.Height().Get(Au.CM), dim.Length().Get(Au.CM))
+		aut, ok := aut.(Au.Dimensions)
+		if ok {
+			fmt.Println(aut.Width().Get(Au.CM), aut.Height().Get(Au.CM), aut.Length().Get(Au.CM))
+		}
+
 	}
 }
