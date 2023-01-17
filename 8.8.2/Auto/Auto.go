@@ -18,8 +18,6 @@ func (u Unit) Get(t UnitType) float64 {
 	if t != u.T {
 		if u.T == CM {
 			value = value / 2.54
-		} else {
-			value = value * 2.54
 		}
 	}
 
@@ -40,13 +38,22 @@ type Auto interface {
 	EnginePower() int
 }
 
+type AllAuto struct {
+	auto
+	dimensions
+}
+
 type auto struct {
 	brand       string
 	model       string
-	dimensions  Dimensions
 	maxSpeed    int
 	enginePower int
 }
+
+/*func (a *auto) Dimensions() Dimensions {
+
+	panic("implement me")
+}*/
 
 type dimensions struct {
 	length   float64
@@ -55,51 +62,53 @@ type dimensions struct {
 	unitType UnitType
 }
 
-func (a *auto) Brand() string {
+func (a *AllAuto) Brand() string {
 	return a.brand
 }
-func (a *auto) Model() string {
+func (a *AllAuto) Model() string {
 	return a.model
 }
-func (a *auto) MaxSpeed() int {
+func (a *AllAuto) MaxSpeed() int {
 	return a.maxSpeed
 }
-func (a *auto) EnginePower() int {
+func (a *AllAuto) EnginePower() int {
 	return a.enginePower
 }
 
-func (d *dimensions) Length() Unit {
+func (a *AllAuto) Length() Unit {
 	return Unit{
-		Value: d.length,
-		T:     d.unitType,
+		Value: a.length,
+		T:     a.unitType,
 	}
 }
 
-func (d *dimensions) Width() Unit {
+func (a *AllAuto) Width() Unit {
 	return Unit{
-		Value: d.width,
-		T:     d.unitType,
+		Value: a.width,
+		T:     a.unitType,
 	}
 }
-func (d *dimensions) Height() Unit {
+func (a *AllAuto) Height() Unit {
 	return Unit{
-		Value: d.height,
-		T:     d.unitType,
+		Value: a.height,
+		T:     a.unitType,
 	}
 }
 
-func ConstructAuto(b, m string, len, wid, hei float64, ms, en int) *auto {
-	return &auto{
-		brand: b,
-		model: m,
-		dimensions: &dimensions{
+func NewConstructAuto(b, m string, len, wid, hei float64, ms, en int, unitType UnitType) *AllAuto {
+	return &AllAuto{
+		auto{
+			brand:       b,
+			model:       m,
+			maxSpeed:    ms,
+			enginePower: en,
+		},
+		dimensions{
 			length:   len,
 			width:    wid,
 			height:   hei,
-			unitType: "",
+			unitType: unitType,
 		},
-		maxSpeed:    ms,
-		enginePower: en,
 	}
 
 }
