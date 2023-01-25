@@ -15,7 +15,7 @@ func (m Man) Count() int {
 }
 
 func (m Man) Data() string {
-	return fmt.Sprintf("Имя: %s,Кол-во орестов: %v", m.Name, m.Crimes)
+	return fmt.Sprintf("подозреваемый, у которого наибольшее количество совершённых преступлений: Имя:%s,Кол-во арестов: %v", m.Name, m.Crimes)
 }
 
 var People = map[string]Man{
@@ -27,7 +27,6 @@ var People = map[string]Man{
 }
 
 func main() {
-
 	suspects := []string{"Гадя", "Надежда", "Борис животное", "Ира кружка"}
 	/*var outlaw Man
 	outlawBool := false
