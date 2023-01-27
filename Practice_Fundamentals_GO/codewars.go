@@ -6,11 +6,11 @@ import (
 )
 
 func main() {
-
 	//fmt.Print(CountPositivesSumNegatives([]int{-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -55, -13, -11, -12, -13, -14, -15}))
 	//fmt.Print(MergeArrays([]int{1, 2, 3, 4}, []int{1, 6, 7, 8}))
 	//mt.Println(century(201))
-	fmt.Println(Rps("rock", "scissors"))
+	//fmt.Println(Rps("rock", "scissors"))
+
 }
 func Rps(p1, p2 string) string {
 	/*Rock Paper Scissors
