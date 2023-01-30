@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"sort"
+	"strconv"
+	"strings"
 )
 
 func main() {
@@ -10,8 +12,110 @@ func main() {
 	//fmt.Print(MergeArrays([]int{1, 2, 3, 4}, []int{1, 6, 7, 8}))
 	//mt.Println(century(201))
 	//fmt.Println(Rps("rock", "scissors"))
+	//fmt.Println(Derive(5, 9))
+	//fmt.Println(Divisors(11))
+	//fmt.Println(Invert([]int{1, 2, 3, 4, 5}))
+	//fmt.Println(ReverseSeq(5))
+	//fmt.Println(countSheep(2))
+	fmt.Println(ToJadenCase("All the rules in this world were made by someone no smarter than you. So make your own."))
+}
+func ToJadenCase(str string) string {
+
+	//	return strings.Title(str) // устарела
+
+	if len(str) == 0 {
+		return ""
+	}
+	var sb strings.Builder
+	split := strings.Split(str, " ")
+	for _, v := range split {
+		//strings.ToUpper(string(v[0]))
+		fmt.Fprintf(&sb, strings.Replace(v, string(v[0]), strings.ToUpper(string(v[0])), 1)+" ")
+	}
+	return strings.Trim(sb.String(), "\n \r")
+
+	/*words := strings.Split(str, " ")
+	for i, word := range words {
+		if len(word) == 0 {
+			continue
+		}
+		w := strings.ToUpper(string(word[0]))
+		words[i] = w
+		if len(word) == 1 {
+			continue
+		}
+		words[i] = w + word[1:]
+	}
+	return strings.Join(words, " ")*/
 
 }
+
+func countSheep(num int) string {
+	var sb strings.Builder
+	for count := 1; count <= num; count++ {
+		fmt.Fprintf(&sb, "%d shep...", count)
+	}
+	return sb.String()
+	/*
+		str := ""
+		for i := 1; i <= num; i++ {
+			num := strconv.Itoa(i)
+			str += num + " sheep..."
+		}
+		return str
+	*/
+	/*Given a non-negative integer, 3 for example,
+	return a string with a murmur: "1 sheep...2 sheep...3 sheep...".
+	Input will always be valid, i.e. no negative integers.*/
+}
+func ReverseSeq(n int) []int {
+	arr := []int{}
+	for ; n != 0; n-- {
+		arr = append(arr, n)
+	}
+	return arr
+	/*
+	   Build a function that returns an array of integers from n to 1 where n>0.
+	   Example : n=5 --> [5,4,3,2,1]
+	*/
+}
+
+func Invert(arr []int) []int {
+	if len(arr) < 1 {
+		return nil
+	}
+	invertArr := []int{}
+	for _, v := range arr {
+		v = v - (v * 2)
+		invertArr = append(invertArr, v)
+	}
+	return invertArr
+
+}
+
+func Divisors(n int) int {
+	count := 0
+	for i := 1; i <= n; i++ {
+		if n%i == 0 {
+			count += 1
+		}
+	}
+
+	return count
+	/*	Count the number of divisors of a positive integer n.
+		Random tests go up to n = 500000.
+		Examples (input --> output)
+		4 --> 3 (1, 2, 4)
+		5 --> 2 (1, 5)
+		12 --> 6 (1, 2, 3, 4, 6, 12)
+		30 --> 8 (1, 2, 3, 5, 6, 10, 15, 30)*/
+}
+
+func Derive(coefficient, exponent int) string {
+	//return fmt.Sprintf("%dx^%d ", coefficient*exponent, exponent-1)
+	return strconv.Itoa(coefficient*exponent) + "x^" + strconv.Itoa(exponent-1)
+}
+
 func Rps(p1, p2 string) string {
 	/*Rock Paper Scissors
 	Let's play! You have to return which player won! In case of a draw return Draw!.
