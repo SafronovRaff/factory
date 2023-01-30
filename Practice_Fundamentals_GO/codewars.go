@@ -17,8 +17,26 @@ func main() {
 	//fmt.Println(Invert([]int{1, 2, 3, 4, 5}))
 	//fmt.Println(ReverseSeq(5))
 	//fmt.Println(countSheep(2))
-	fmt.Println(ToJadenCase("All the rules in this world were made by someone no smarter than you. So make your own."))
+	//fmt.Println(ToJadenCase("All the rules in this world were made by someone no smarter than you. So make your own."))
+	//fmt.Println(CountBy(20, 5))
 }
+
+func CountBy(x, n int) []int {
+	arr := make([]int, 0)
+	for i := 1; i <= n; i++ {
+		arr = append(arr, i*x)
+	}
+	return arr
+
+	/*
+		Create a function with two arguments that will return an array of the first n multiples of x.
+		Assume both the given number and the number of times to count will be positive numbers greater than 0.
+		Return the results as an array or list ( depending on language ).
+		Examples
+		countBy(1,10)  should return  {1,2,3,4,5,6,7,8,9,10}
+		countBy(2,5)  should return {2,4,6,8,10}*/
+}
+
 func ToJadenCase(str string) string {
 
 	//	return strings.Title(str) // устарела
