@@ -19,8 +19,60 @@ func main() {
 	//fmt.Println(countSheep(2))
 	//fmt.Println(ToJadenCase("All the rules in this world were made by someone no smarter than you. So make your own."))
 	//fmt.Println(CountBy(20, 5))
+	//fmt.Println(Move(3, 5))
+	fmt.Println(TwoToOne("bsjвавамсbjs", "sdттндддsds"))
+}
+func TwoToOne(s1 string, s2 string) string {
+	/*str := strings.Split(s1+s2, "")
+	sort.Strings(str)
+	res := ""
+	for _, v := range str {
+		chr := string(v)
+		if !strings.Contains(res, chr) {
+			res = res + chr
+		}
+	}
+	return res*/
+	str := s1 + s2
+	result := ""
+	for _, char := range strings.Split("abcdefghijklmnopqrstuvwxyz", "") {
+		if strings.Contains(str, char) {
+			result += char
+		}
+	}
+	return result
+
+	/*
+		str := s1 + s2
+		buf := make(map[string]bool)
+		res := []string{}
+		for _, v := range str {
+			if unicode.Is(unicode.Latin, v) {
+				buf[string(v)] = true
+			}
+		}
+		for key, _ := range buf {
+			res = append(res, key)
+		}
+		sort.Strings(res)
+		return strings.Join(res, "")*/
+
+	/*
+		Take 2 strings s1 and s2 including only letters from a to z.
+		Return a new sorted string, the longest possible,
+		containing distinct letters - each taken only once - coming from s1 or s2.
+			  Examples:
+			  a = "xyaabbbccccdefww"
+			  b = "xxxxyyyyabklmopq"
+			  longest(a, b) -> "abcdefklmopqwxy"
+
+			  a = "abcdefghijklmnopqrstuvwxyz"
+			  longest(a, a) -> "abcdefghijklmnopqrstuvwxyz"*/
 }
 
+func Move(position int, roll int) int {
+	return position + (roll * 2)
+}
 func CountBy(x, n int) []int {
 	arr := make([]int, 0)
 	for i := 1; i <= n; i++ {
@@ -38,7 +90,6 @@ func CountBy(x, n int) []int {
 }
 
 func ToJadenCase(str string) string {
-
 	//	return strings.Title(str) // устарела
 
 	if len(str) == 0 {
@@ -86,6 +137,7 @@ func countSheep(num int) string {
 	return a string with a murmur: "1 sheep...2 sheep...3 sheep...".
 	Input will always be valid, i.e. no negative integers.*/
 }
+
 func ReverseSeq(n int) []int {
 	arr := []int{}
 	for ; n != 0; n-- {
