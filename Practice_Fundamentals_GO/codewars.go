@@ -24,6 +24,76 @@ func main() {
 	//fmt.Println(StringToArray("str string uhuh ssds"))
 	//fmt.Println(FakeBin("338392736587"))
 	//fmt.Println(Between(4, 6))
+	//fmt.Println(IsTriangle(8, 3, 5))
+	//fmt.Println(GetMiddle("123456"))
+	//fmt.Println(FindMultiples(5, 25))
+	fmt.Println(WordsToMarks("attitude"))
+}
+
+func WordsToMarks(s string) int {
+	res := 0
+	/*for _, value := range s {
+		if value >= 'a' && value <= 'z' {
+			res = res + int(value-'a') + 1
+		}
+	}	*/
+
+	for _, value := range s {
+		res = res + int(value) - 96 //ASCII: a = 97,..., z = 122
+	}
+	return res
+
+	/*
+		a = 1, b = 2, c = 3 ... z = 26
+		Then l + o + v + e = 54
+		and f + r + i + e + n + d + s + h + i + p = 108
+		So friendship is twice as strong as love :-)
+		Your task is to write a function which calculates the value of a word based off the sum of the alphabet positions of its characters.
+		The input will always be made of only lowercase letters and will never be empty.*/
+}
+func FindMultiples(integer, limit int) []int {
+	/*var res []int
+	num := integer
+	for i := integer; i <= limit; i = i + num {
+		res = append(res, i)
+	}*/
+
+	res := make([]int, limit/integer+1)
+	for i, j := integer, 0; i <= limit; i, j = i+integer, j+1 {
+		res[j] = i
+	}
+
+	return res[:limit/integer]
+}
+func GetMiddle(s string) string {
+	n := len(s)
+	if n == 0 {
+		return s
+	}
+	return s[(n-1)/2 : n/2+1]
+
+	/*if len(s)%2 == 0 {
+		sl := s[(len(s)/2)-1 : len(s)/2+1]
+		return sl
+	}
+	return s[(len(s) / 2) : (len(s)/2)+1]*/
+
+	/*You are going to be given a word. Your job is to return the middle character of the word.
+	If the word's length is odd, return the middle character.
+	If the word's length is even, return the middle 2 characters.
+	#Examples:
+	Kata.getMiddle("test") should return "es"
+	Kata.getMiddle("testing") should return "t"
+	Kata.getMiddle("middle") should return "dd"
+	Kata.getMiddle("A") should return "A"*/
+}
+
+func IsTriangle(a, b, c int) bool {
+	return a+b > c && a+c > b && c+b > a
+
+	/*Implement a function that accepts 3 integer values a, b, c.
+	The function should return true if a triangle can be built with the sides of given length and false in any other case.
+	(In this case, all triangles must have surface greater than 0 to be accepted).*/
 }
 
 func Between(a, b int) []int {
