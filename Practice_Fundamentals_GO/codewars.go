@@ -20,8 +20,64 @@ func main() {
 	//fmt.Println(ToJadenCase("All the rules in this world were made by someone no smarter than you. So make your own."))
 	//fmt.Println(CountBy(20, 5))
 	//fmt.Println(Move(3, 5))
-	fmt.Println(TwoToOne("bsjвавамсbjs", "sdттндддsds"))
+	//fmt.Println(TwoToOne("bsjвавамсbjs", "sdттндддsds"))
+	//fmt.Println(StringToArray("str string uhuh ssds"))
+	//fmt.Println(FakeBin("338392736587"))
+	//fmt.Println(Between(4, 6))
 }
+
+func Between(a, b int) []int {
+	// Time: 2737 ms
+	/*res := make([]int, 0)
+	for a <= b {
+		res = append(res, a)
+		a++
+	}
+	return res*/
+
+	//Time: 1503ms
+	res := make([]int, b-a+1)
+	for i := a; i <= b; i++ {
+		res[i-a] = i
+	}
+	return res
+}
+
+func FakeBin(x string) string {
+	/*	res := ""
+		for _, v := range x {
+			num := int(v - '0')
+			if num < 5 {
+				res = res + "0"
+			} else {
+				res += "1"
+			}
+		}
+		return res*/
+	/*	Строка num := int(v - '0') преобразует строковый символ v в целое число. Вот как это работает: v — это символ в строке x,
+		поэтому его тип — rune (что в Go эквивалентно char в других языках программирования).
+		«0» — это символьный литерал, представляющий код ASCII для цифры 0. Вычитая «0» из v, мы получаем разницу между их кодами ASCII.
+		Эта разница будет представлять собой целочисленное значение цифры, представленной v. Наконец, функция int преобразует полученную разность (типа rune) в тип int.*/
+
+	bs := []byte(x)
+	for i, v := range bs {
+		if v < '5' {
+			bs[i] = '0'
+		} else {
+			bs[i] = '1'
+		}
+	}
+	return string(bs)
+
+	/*Given a string of digits, you should replace any digit below 5 with
+	'0' and any digit 5 and above with '1'. Return the resulting string.*/
+}
+
+func StringToArray(str string) []string {
+	//return strings.Split(str, " ")
+	return strings.Fields(str)
+}
+
 func TwoToOne(s1 string, s2 string) string {
 	/*str := strings.Split(s1+s2, "")
 	sort.Strings(str)
