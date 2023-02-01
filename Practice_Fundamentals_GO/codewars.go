@@ -27,7 +27,128 @@ func main() {
 	//fmt.Println(IsTriangle(8, 3, 5))
 	//fmt.Println(GetMiddle("123456"))
 	//fmt.Println(FindMultiples(5, 25))
-	fmt.Println(WordsToMarks("attitude"))
+	//fmt.Println(WordsToMarks("attitude"))
+	//	fmt.Println(MakeNegative(0))
+	//fmt.Println(NoSpace("   at tit ude"))
+	//fmt.Println(SumMix([]any{"5", "0", 9, 3, 2, 1, "9", 6, 7}))
+	//fmt.Println(GetCount("abracadabra"))
+	//fmt.Println(RowSumOddNumbers(13))
+	//fmt.Println(GetSize(5,6,10))
+	fmt.Println(PartList([]string{"I", "wish", "I", "hadn't", "come"}))
+}
+
+func PartList(arr []string) string {
+	//res := make([]string, 0)
+	result := ""
+	for i := 1; i < len(arr); i++ {
+		firstPart := strings.Join(arr[:i], " ")
+		secondPart := strings.Join(arr[i:], " ")
+		//res = append(res, "("+firstPart+", "+secondPart+")")
+		result = result + fmt.Sprintf("(%s, %s)", firstPart, secondPart)
+	}
+	//return strings.Join(res, "")
+	return result
+}
+
+func GetSize(w, h, d int) [2]int {
+	//sa := (2 * w * d) + (2 * h * d) + (2 * w * h)
+	//v := w * h * d
+	return [2]int{2 * (w*h + w*d + h*d), w * h * d}
+
+}
+
+func RowSumOddNumbers(n int) int {
+	return n * n * n
+
+	/*res := 0
+	for i := 0; i < n; i++ {
+		res = res + (n * n)
+	}
+	return res*/
+	/*
+		Given the triangle of consecutive odd numbers:
+		           1
+				3     5
+		      7     9    11
+		   13    15    17    19
+		21    23    25    27    29
+		...
+		Calculate the sum of the numbers in the nth row of this triangle
+		(starting at index 1) e.g.: (Input --> Output)
+		1 -->  1
+		2 --> 3 + 5 = 8
+	*/
+}
+
+func GetCount(str string) (count int) {
+	for _, v := range str {
+		switch v {
+		case 'a', 'e', 'i', 'o', 'u':
+			count++
+		}
+	}
+	/*
+		for _, v := range strings.Split(str, "") {
+			if strings.Contains("aeiou", v) {
+				count++
+			}
+		}
+	*/
+	return count
+
+	//Return the number (count) of vowels in the given string.
+	//We will consider a, e, i, o, u as vowels for this Kata (but not y).
+	//The input string will only consist of lower case letters and/or spaces.
+
+}
+
+func SumMix(arr []interface{}) int {
+	sum := 0
+
+	for _, v := range arr {
+		iv, _ := strconv.Atoi(fmt.Sprintf("%v", v))
+		sum += iv
+
+		/*
+			switch v := v.(type) {
+			case int:
+				sum += v
+			case string:
+				num, _ := strconv.Atoi(v)
+				sum += num
+			} */
+
+	}
+	return sum
+}
+
+func NoSpace(word string) string {
+	//return strings.ReplaceAll(word, " ", "")
+
+	/*str := ""
+	for _, v := range strings.Split(word, " ") {
+		if !strings.Contains(v, " ") {
+			str = str + v
+		}
+	}
+	return str*/
+	l := len(word)
+	res, id := make([]rune, l), 0
+	for j := 0; j < l; j++ {
+		if word[j] != ' ' {
+			res[id] = rune(word[j])
+			id++
+		}
+	}
+
+	return string(res[0:id])
+}
+
+func MakeNegative(x int) int {
+	if x >= 0 {
+		return -x
+	}
+	return x
 }
 
 func WordsToMarks(s string) int {
