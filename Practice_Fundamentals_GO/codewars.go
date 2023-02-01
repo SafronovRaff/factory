@@ -34,7 +34,26 @@ func main() {
 	//fmt.Println(GetCount("abracadabra"))
 	//fmt.Println(RowSumOddNumbers(13))
 	//fmt.Println(GetSize(5,6,10))
-	fmt.Println(PartList([]string{"I", "wish", "I", "hadn't", "come"}))
+	//fmt.Println(PartList([]string{"I", "wish", "I", "hadn't", "come"}))
+	//fmt.Println(DNAStrand("ATTGC"))
+}
+func DNAStrand(dna string) string {
+	res := ""
+
+	for _, v := range dna {
+		switch v {
+		case 'A':
+			res = res + "T"
+		case 'T':
+			res = res + "A"
+		case 'G':
+			res = res + "C"
+		case 'C':
+			res = res + "G"
+		}
+	}
+	return res
+
 }
 
 func PartList(arr []string) string {
