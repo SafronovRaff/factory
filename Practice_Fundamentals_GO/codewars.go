@@ -38,6 +38,98 @@ func main() {
 	//fmt.Println(PartList([]string{"I", "wish", "I", "hadn't", "come"}))
 	//fmt.Println(DNAStrand("ATTGC"))
 	//	fmt.Println(GetSum(5, -1))
+	//fmt.Println(LongestConsec([]string{"zone", "abigail", "theta", "form", "libe", "zas"}, 3))
+	//fmt.Println(GetGrade(60, 82, 76))
+	//fmt.Println(MxDifLg([]string{"hoqq", "bbllkw", "oox", "ejjuyyy", "plmiis", "xxxzgpsssa", "xxwwkktt", "znnnnfqknaz", "qqquuhii", "dvvvwz"}, []string{"cccooommaaqqoxii", "gggqaffhhh", "tttoowwwmmww"}))
+
+}
+func MxDifLg(a1 []string, a2 []string) int {
+	if len(a1) == 0 || len(a2) == 0 {
+		return -1
+	}
+
+	maxDiff := 0.0
+	for _, x := range a1 {
+
+		for _, y := range a2 {
+
+			diff := math.Abs(float64(len(x) - len(y)))
+
+			if diff > maxDiff {
+				maxDiff = diff
+			}
+		}
+	}
+
+	return int(maxDiff)
+	/*
+	   You are given two arrays a1 and a2 of strings.
+	   Each string is composed with letters from a to z.
+	   Let x be any string in the first array and y be any string in the second array.
+
+	   		Find max(abs(length(x) − length(y)))
+
+	   	If a1 and/or a2 are empty return -1 in each language except in Haskell (F#) where you will return Nothing (None).
+	   		Example:
+	   	a1 = ["hoqq", "bbllkw", "oox", "ejjuyyy", "plmiis", "xxxzgpsssa", "xxwwkktt", "znnnnfqknaz", "qqquuhii", "dvvvwz"]
+	   	a2 = ["cccooommaaqqoxii", "gggqaffhhh", "tttoowwwmmww"]
+	   	mxdiflg(a1, a2) --> 13
+	   	Bash note:
+	   	input : 2 strings with substrings separated by ,
+	   	output: number as a string
+	*/
+}
+func GetGrade(a, b, c int) rune {
+	score := (a + b + c) / 3
+	switch {
+	case 90 <= score && score <= 100:
+		return 'A'
+	case 80 <= score && score < 90:
+		return 'B'
+	case 70 <= score && score < 80:
+		return 'C'
+	case 60 <= score && score < 70:
+		return 'D'
+	default:
+		return 'F'
+	}
+
+	//return rune("FFFFFFDCBAA"[(a+b+c)/30])
+}
+
+func LongestConsec(strarr []string, k int) string {
+	n := len(strarr)
+	var result string
+	for i := 0; i <= n-k; i++ {
+		temp := strings.Join(strarr[i:i+k], "")
+		//fmt.Println(temp)
+		if len(temp) > len(result) {
+			result = temp
+		}
+	}
+	return result
+	/*You are given an array(list) strarr of strings and an integer k.
+		Your task is to return the first longest string consisting of k consecutive strings taken in the array.
+		strarr = ["tree", "foling", "trashy", "blue", "abcdef", "uvwxyz"], k = 2
+
+	Concatenate the consecutive strings of strarr by 2, we get:
+
+	treefoling   (length 10)  concatenation of strarr[0] and strarr[1]
+	folingtrashy ("      12)  concatenation of strarr[1] and strarr[2]
+	trashyblue   ("      10)  concatenation of strarr[2] and strarr[3]
+	blueabcdef   ("      10)  concatenation of strarr[3] and strarr[4]
+	abcdefuvwxyz ("      12)  concatenation of strarr[4] and strarr[5]
+
+	Two strings are the longest: "folingtrashy" and "abcdefuvwxyz".
+	The first that came is "folingtrashy" so
+	longest_consec(strarr, 2) should return "folingtrashy".
+
+	In the same way:
+	longest_consec(["zone", "abigail", "theta", "form", "libe", "zas", "theta", "abigail"], 2) --> "abigailtheta"
+	n being the length of the string array, if n = 0 or k > n or k <= 0 return "" (return Nothing in Elm, "nothing" in Erlang).
+
+	Note
+	consecutive strings : follow one after another without an interruption*/
 }
 
 func GetSum(a, b int) (res int) {
