@@ -29,7 +29,7 @@ func main() {
 	//fmt.Println(GetMiddle("123456"))
 	//fmt.Println(FindMultiples(5, 25))
 	//fmt.Println(WordsToMarks("attitude"))
-	//	fmt.Println(MakeNegative(0))
+	//fmt.Println(MakeNegative(0))
 	//fmt.Println(NoSpace("   at tit ude"))
 	//fmt.Println(SumMix([]any{"5", "0", 9, 3, 2, 1, "9", 6, 7}))
 	//fmt.Println(GetCount("abracadabra"))
@@ -37,12 +37,27 @@ func main() {
 	//fmt.Println(GetSize(5,6,10))
 	//fmt.Println(PartList([]string{"I", "wish", "I", "hadn't", "come"}))
 	//fmt.Println(DNAStrand("ATTGC"))
-	//	fmt.Println(GetSum(5, -1))
+	//fmt.Println(GetSum(5, -1))
 	//fmt.Println(LongestConsec([]string{"zone", "abigail", "theta", "form", "libe", "zas"}, 3))
 	//fmt.Println(GetGrade(60, 82, 76))
 	//fmt.Println(MxDifLg([]string{"hoqq", "bbllkw", "oox", "ejjuyyy", "plmiis", "xxxzgpsssa", "xxwwkktt", "znnnnfqknaz", "qqquuhii", "dvvvwz"}, []string{"cccooommaaqqoxii", "gggqaffhhh", "tttoowwwmmww"}))
+	//fmt.Println(TwiceAsOld(35,15))
+}
+
+func TwiceAsOld(dadYearsOld, sonYearsOld int) int {
+
+	return int(math.Abs(float64(sonYearsOld*2) - float64(dadYearsOld)))
+
+	/*
+		Your function takes two arguments:
+		current father's age (years)
+		current age of his son (years)
+		Сalculate how many years ago the father was twice as old as his son (or in how many years he will be twice as old).
+		The answer is always greater or equal to 0, no matter if it was in the past or it is in the future.
+	*/
 
 }
+
 func MxDifLg(a1 []string, a2 []string) int {
 	if len(a1) == 0 || len(a2) == 0 {
 		return -1
@@ -79,6 +94,7 @@ func MxDifLg(a1 []string, a2 []string) int {
 	   	output: number as a string
 	*/
 }
+
 func GetGrade(a, b, c int) rune {
 	score := (a + b + c) / 3
 	switch {
@@ -143,6 +159,7 @@ func GetSum(a, b int) (res int) {
 	}
 	return res
 }
+
 func DNAStrand(dna string) string {
 	res := ""
 
@@ -297,6 +314,7 @@ func WordsToMarks(s string) int {
 		Your task is to write a function which calculates the value of a word based off the sum of the alphabet positions of its characters.
 		The input will always be made of only lowercase letters and will never be empty.*/
 }
+
 func FindMultiples(integer, limit int) []int {
 	/*var res []int
 	num := integer
@@ -311,6 +329,7 @@ func FindMultiples(integer, limit int) []int {
 
 	return res[:limit/integer]
 }
+
 func GetMiddle(s string) string {
 	n := len(s)
 	if n == 0 {
@@ -445,6 +464,7 @@ func TwoToOne(s1 string, s2 string) string {
 func Move(position int, roll int) int {
 	return position + (roll * 2)
 }
+
 func CountBy(x, n int) []int {
 	arr := make([]int, 0)
 	for i := 1; i <= n; i++ {
