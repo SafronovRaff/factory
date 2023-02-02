@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"sort"
 	"strconv"
 	"strings"
@@ -36,6 +37,19 @@ func main() {
 	//fmt.Println(GetSize(5,6,10))
 	//fmt.Println(PartList([]string{"I", "wish", "I", "hadn't", "come"}))
 	//fmt.Println(DNAStrand("ATTGC"))
+	//	fmt.Println(GetSum(5, -1))
+}
+
+func GetSum(a, b int) (res int) {
+	if a == b {
+		return a
+	}
+	max := math.Max(float64(a), float64(b))
+	min := math.Min(float64(a), float64(b))
+	for i := min; i <= max; i++ {
+		res = res + int(i)
+	}
+	return res
 }
 func DNAStrand(dna string) string {
 	res := ""
