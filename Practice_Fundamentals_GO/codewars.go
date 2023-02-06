@@ -44,7 +44,55 @@ func main() {
 	//fmt.Println(TwiceAsOld(35,15))
 	//fmt.Println(LoveFunc(5,9))
 	//fmt.Println(Greet("Mark"))
-	fmt.Println(FindEvenIndex([]int{10, -80, 10, 10, 15, 35, 20}))
+	//fmt.Println(FindEvenIndex([]int{10, -80, 10, 10, 15, 35, 20}))
+	//	fmt.Println(Summation(50))
+	fmt.Println(findMostOftenRepeated([]int{110, 12, 35, 35, 20, 12, 35}))
+}
+
+func findMostOftenRepeated(array []int) (mostOften int, err error) {
+	if len(array) == 0 {
+		return 0, fmt.Errorf("could not found repeated numbers in empty slice")
+	}
+
+	counts := make(map[int]int)
+	for i := 0; i < len(array); i++ {
+		counts[array[i]]++
+	}
+
+	var maxCount = 0
+	for key, value := range counts {
+		if value > maxCount {
+			maxCount = value
+			mostOften = key
+		}
+	}
+	return mostOften, nil
+
+	/*
+		var maxIndex, maxCount = 0, 0
+		for i, number := range array {
+			currentCount := 0
+			for _, numberToCompare := range array {
+				if number == numberToCompare {
+					currentCount++
+				}
+			}
+
+			if currentCount > maxCount {
+				maxIndex = i
+				maxCount = currentCount
+			}
+		}
+
+		return array[maxIndex], nil*/
+}
+
+func Summation(n int) int {
+	sum := 0
+	for i := 0; i <= n; i++ {
+		sum += i
+	}
+	return sum
 }
 
 func FindEvenIndex(arr []int) int {
