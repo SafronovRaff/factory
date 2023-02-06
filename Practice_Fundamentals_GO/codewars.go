@@ -46,9 +46,19 @@ func main() {
 	//fmt.Println(Greet("Mark"))
 	//fmt.Println(FindEvenIndex([]int{10, -80, 10, 10, 15, 35, 20}))
 	//	fmt.Println(Summation(50))
-	fmt.Println(findMostOftenRepeated([]int{110, 12, 35, 35, 20, 12, 35}))
+	//fmt.Println(findMostOftenRepeated([]int{110, 12, 35, 35, 20, 12, 35}))
+	//fmt.Println(trimNegative(([]int{110, -12, 35, -35, 20, 12, -35})))
 }
+func trimNegative(array []int) []int {
+	newArr := make([]int, 0)
+	for _, v := range array {
+		if v >= 0 {
+			newArr = append(newArr, v)
+		}
+	}
+	return newArr
 
+}
 func findMostOftenRepeated(array []int) (mostOften int, err error) {
 	if len(array) == 0 {
 		return 0, fmt.Errorf("could not found repeated numbers in empty slice")
