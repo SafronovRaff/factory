@@ -48,7 +48,48 @@ func main() {
 	//	fmt.Println(Summation(50))
 	//fmt.Println(findMostOftenRepeated([]int{110, 12, 35, 35, 20, 12, 35}))
 	//fmt.Println(trimNegative(([]int{110, -12, 35, -35, 20, 12, -35})))
+	//	fmt.Println(trimLessAverage(([]int{53, -12, 70, -150, 99, 12, -35})))
+	//fmt.Println(insertArr([]int{1, 2, 3, 4, 5, 6, 7}, 8000, 2)) // добавление эл в произвольную позицию index
+	fmt.Println(removeArr([]int{1, 2, 3, 4, 5, 6, 7}, 3)) // удаление эл в поизицию index
+
 }
+
+func insertArr(list []int, el, index int) []int { // добавление эл в произвольную позицию index
+	list = append(list, el)
+
+	for key := len(list) - 1; key > index; key-- {
+		list[key] = list[key-1]
+		fmt.Println(list)
+	}
+	list[index] = el
+	return list
+}
+
+func removeArr(list []int, index int) []int { // удаление эл в поизицию index
+	for key := index + 1; key < len(list); key++ {
+		list[key-1] = list[key]
+		fmt.Println(list)
+	}
+	return list[:len(list)-1]
+}
+
+func trimLessAverage(array []int) []int {
+	sum := 0
+	for _, v := range array {
+		sum += v
+	}
+	average := sum / len(array)
+	newArr := make([]int, 0)
+	for _, v := range array {
+		if v > average {
+			newArr = append(newArr, v)
+		}
+	}
+
+	fmt.Println(newArr)
+	return newArr
+}
+
 func trimNegative(array []int) []int {
 	newArr := make([]int, 0)
 	for _, v := range array {
