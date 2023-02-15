@@ -7,9 +7,9 @@ import (
 
 func main() {
 
-	Iphone := el.DesignerApplePhone("Iphone13pro")
-	Android := el.DesignerAndroidPhone("Samsung", "a5")
-	Panasonic := el.DesignerRadioPhone("Panasonic", "KX-TS2350RUW")
+	Iphone := el.NewDesignerApplePhone("Iphone13pro")
+	Android := el.NewDesignerAndroidPhone("Samsung", "a5")
+	Panasonic := el.NewDesignerRadioPhone("Panasonic", "KX-TS2350RUW")
 	printCharacteristics(Iphone)
 	printCharacteristics(Android)
 	printCharacteristics(Panasonic)

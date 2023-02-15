@@ -18,69 +18,69 @@ type features struct {
 	os        string
 }
 
-type applePhone struct {
+type ApplePhone struct {
 	features
 }
 
-type androidPhone struct {
+type AndroidPhone struct {
 	features
 }
 
-type radioPhone struct {
+type RadioPhone struct {
 	buttonsCount int
 	features
 }
 
 // ios
-func (a *applePhone) OS() string {
+func (a *ApplePhone) OS() string {
 	return a.os
 }
 
-func (a *applePhone) Brand() string {
+func (a *ApplePhone) Brand() string {
 	return a.brand
 }
 
-func (a *applePhone) Model() string {
+func (a *ApplePhone) Model() string {
 	return a.model
 }
-func (a *applePhone) Type() string {
+func (a *ApplePhone) Type() string {
 	return a.phoneType
 }
 
 // vedroid
-func (an *androidPhone) OS() string {
+func (an *AndroidPhone) OS() string {
 	return an.os
 }
 
-func (an *androidPhone) Brand() string {
+func (an *AndroidPhone) Brand() string {
 	return an.brand
 }
 
-func (an *androidPhone) Model() string {
+func (an *AndroidPhone) Model() string {
 	return an.model
 }
-func (an *androidPhone) Type() string {
+func (an *AndroidPhone) Type() string {
 	return an.phoneType
 }
 
 // tapok
-func (r *radioPhone) ButtonsCount() int {
+func (r *RadioPhone) ButtonsCount() int {
 	return r.buttonsCount
 }
 
-func (r *radioPhone) Brand() string {
+func (r *RadioPhone) Brand() string {
 	return r.brand
 }
 
-func (r *radioPhone) Model() string {
+func (r *RadioPhone) Model() string {
 	return r.model
 }
-func (r *radioPhone) Type() string {
+func (r *RadioPhone) Type() string {
 	return r.phoneType
 }
 
-func DesignerApplePhone(b string) *applePhone {
-	return &applePhone{features{
+func NewDesignerApplePhone(b string) *ApplePhone {
+	return &ApplePhone{features{
 		brand:     "aplle",
 		model:     b,
 		phoneType: "smartphone",
@@ -88,8 +88,8 @@ func DesignerApplePhone(b string) *applePhone {
 	}}
 }
 
-func DesignerAndroidPhone(b, m string) *androidPhone {
-	return &androidPhone{features{
+func NewDesignerAndroidPhone(b, m string) *AndroidPhone {
+	return &AndroidPhone{features{
 		brand:     b,
 		model:     m,
 		phoneType: "smartphone",
@@ -97,8 +97,8 @@ func DesignerAndroidPhone(b, m string) *androidPhone {
 	}}
 
 }
-func DesignerRadioPhone(b, m string) *radioPhone {
-	return &radioPhone{
+func NewDesignerRadioPhone(b, m string) *RadioPhone {
+	return &RadioPhone{
 		buttonsCount: 15,
 		features: features{
 			brand:     b,
