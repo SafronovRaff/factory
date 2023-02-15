@@ -91,7 +91,7 @@ func BenchmarkInsertionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10, 100)
 			b.StartTimer()
-			insertionSort
+			insertionSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -102,7 +102,7 @@ func BenchmarkInsertionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(100, 1000)
 			b.StartTimer()
-			insertionSort
+			insertionSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -113,7 +113,7 @@ func BenchmarkInsertionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10000, 100000)
 			b.StartTimer()
-			insertionSort
+			insertionSort(ar)
 			b.StopTimer()
 		}
 	})
