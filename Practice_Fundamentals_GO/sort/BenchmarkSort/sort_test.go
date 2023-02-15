@@ -1,4 +1,4 @@
-package testSort
+package BenchmarkSort
 
 import (
 	"math/rand"
