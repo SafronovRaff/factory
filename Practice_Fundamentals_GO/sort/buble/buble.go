@@ -16,7 +16,7 @@ func main() {
 		ar[i] = rand.Intn(200) - 100 // ограничиваем случайное значение от [-100;100]
 	}
 
-	bubbleSort(ar)
+	//bubbleSort(ar)
 
 	fmt.Println(ar)
 }

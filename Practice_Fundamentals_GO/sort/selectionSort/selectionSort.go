@@ -16,12 +16,12 @@ func main() {
 		ar[i] = rand.Intn(200) - 100 // ограничиваем случайное значение от [-100;100]
 	}
 
-	//SortingByChoice(ar)
+	//selectionSort(ar)
 	bidirectionalSelectionSort(ar)
 	fmt.Println(ar)
 }
 
-func SortingByChoice(ar []int) {
+func selectionSort(ar []int) {
 	n := len(ar)
 	for i := 0; i < n-1; i++ {
 		minIndex := i
