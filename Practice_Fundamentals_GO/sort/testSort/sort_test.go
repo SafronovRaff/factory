@@ -56,7 +56,7 @@ func BenchmarkSelectionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10, 100)
 			b.StartTimer()
-			bubbleSort(ar)
+			selectionSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -67,7 +67,7 @@ func BenchmarkSelectionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(100, 1000)
 			b.StartTimer()
-			bubbleSort(ar)
+			selectionSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -78,7 +78,7 @@ func BenchmarkSelectionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10000, 100000)
 			b.StartTimer()
-			bubbleSort(ar)
+			selectionSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -91,7 +91,7 @@ func BenchmarkInsertionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10, 100)
 			b.StartTimer()
-			bubbleSort(ar)
+			insertionSort
 			b.StopTimer()
 		}
 	})
@@ -102,7 +102,7 @@ func BenchmarkInsertionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(100, 1000)
 			b.StartTimer()
-			bubbleSort(ar)
+			insertionSort
 			b.StopTimer()
 		}
 	})
@@ -113,7 +113,7 @@ func BenchmarkInsertionSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10000, 100000)
 			b.StartTimer()
-			bubbleSort(ar)
+			insertionSort
 			b.StopTimer()
 		}
 	})
@@ -126,7 +126,7 @@ func BenchmarkMergeSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10, 100)
 			b.StartTimer()
-			bubbleSort(ar)
+			mergeSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -137,7 +137,7 @@ func BenchmarkMergeSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(100, 1000)
 			b.StartTimer()
-			bubbleSort(ar)
+			mergeSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -148,7 +148,7 @@ func BenchmarkMergeSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10000, 100000)
 			b.StartTimer()
-			bubbleSort(ar)
+			mergeSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -161,7 +161,7 @@ func BenchmarkQuickSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10, 100)
 			b.StartTimer()
-			bubbleSort(ar)
+			quickSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -172,7 +172,7 @@ func BenchmarkQuickSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(100, 1000)
 			b.StartTimer()
-			bubbleSort(ar)
+			quickSort(ar)
 			b.StopTimer()
 		}
 	})
@@ -183,7 +183,7 @@ func BenchmarkQuickSort(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			ar := genSl(10000, 100000)
 			b.StartTimer()
-			bubbleSort(ar)
+			quickSort(ar)
 			b.StopTimer()
 		}
 	})
