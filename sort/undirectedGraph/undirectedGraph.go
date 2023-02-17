@@ -26,7 +26,21 @@ func main() {
 	fmt.Println(g) //{map[0:[1] 1:[0 2] 2:[1 3] 3:[2]]}
 
 }
- // поиск в ширину BFS
-func ()  {
-	
+
+// поиск в ширину BFS
+func (g *Graph) BFS(start int) []int {
+	visited := make(map[int]bool) // словарь для отслеживания посещенных вершин
+	queue := make([]int, 0)       // очередь вершин, которые нужно обработать
+	res := make([]int, 0)         // список посещенных
+	visited[start] = true         // помечаем начальную как посещенную
+	queue = append(queue, start)  // добавляем начальную вершину в очередь
+
+	//очередь не пуста, обрабатываем вершины
+	for len(queue) > 0 {
+		node := queue[0]        // порвая вершина из очереди
+		queue = queue[1:]       // удаляем из очереди
+		res = append(res, node) // добавляем в список посещенных
+
+	}
+	return res
 }
