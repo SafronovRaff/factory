@@ -3,7 +3,9 @@ package main
 import (
 	"container/list"
 	"fmt"
+	"math/rand"
 	"strconv"
+	"time"
 )
 
 type Graph struct {
@@ -40,8 +42,7 @@ func (g *Graph) addNode(id int) *Node {
 	return node
 }
 
-//addEdge - добавление ребер
-
+// addEdge - добавление ребер
 func (n *Node) addEdge(dest *Node, weight int) {
 	edge := &Edge{
 		dest:   dest,
@@ -89,6 +90,7 @@ func (g *Graph) addNodeWithEdge(id, destID, weight int) {
 
 }
 
+// Print - печать графа
 func (g *Graph) Print() {
 	for _, n := range g.nodes {
 		fmt.Printf("Node %d: ", n.id)
@@ -97,34 +99,6 @@ func (g *Graph) Print() {
 		}
 		fmt.Printf("\n")
 	}
-}
-
-func main() {
-	g := Graph{}
-	/*
-		node1 := g.addNode(1)
-		node2 := g.addNode(2)
-		node3 := g.addNode(3)
-		node4 := g.addNode(4)
-		node1.addEdge(node2, 1)
-		node1.addEdge(node3, 2)
-		node2.addEdge(node4, 3)
-		node3.addEdge(node4, 4)
-	*/
-
-	g.addNodeWithEdge(1, 2, 1)
-	g.addNodeWithEdge(1, 3, 2)
-	g.addNodeWithEdge(2, 4, 3)
-	g.addNodeWithEdge(3, 4, 4)
-	g.Print()
-	g.printShortestPath(1, 4)
-	g.addNodeWithEdge(12, 2, 1)
-	g.addNodeWithEdge(1, 2, 1)
-	g.addNodeWithEdge(1, 2, 1)
-	g.addNodeWithEdge(1, 2, 1)
-	g.addNodeWithEdge(1, 2, 1)
-	g.addNodeWithEdge(1, 2, 1)
-
 }
 
 // printShortestPath -печать кратчайшего пути
@@ -149,7 +123,8 @@ func (g *Graph) printShortestPath(sourceID, destID int) {
 }
 
 //shortestPath - определения кратчайшего пути между любой парой вершин
-//алгоритм поиска в ширину(BFS) с учетом весов ребер,находит кратчайший путь от начальной вершины до всех других вершин в графе.
+//алгоритм поиска в ширину(BFS) с учетом весов ребер,
+//находит кратчайший путь от начальной вершины до всех других вершин в графе.
 
 func (g *Graph) shortestPath(sourceID, destID int) []int {
 	// карта расстояний для каждого узла
@@ -194,7 +169,7 @@ func (g *Graph) shortestPath(sourceID, destID int) []int {
 			}
 		}
 	}
-	// если расстояние до узла - назначения не установленно ,путь не найден
+	// если расстояние до узла - назначения не установленно, путь не найден
 	if _, ok := distances[destID]; !ok {
 		return nil
 	}
@@ -215,4 +190,76 @@ func (g *Graph) getNode(id int) *Node {
 		}
 	}
 	return nil
+}
+
+// randomGraph - заполняет граф случайными значениями принимает колл узлов, колл рёбер и макс вес ребра.
+func (g *Graph) randomGraph(numNode, numEdges, maxWeight int) {
+	//	генератор случайных чисел
+	rand.Seed(time.Now().UnixNano())
+
+	// добавляем узлы графа
+	for i := 0; i < numNode; i++ {
+		g.addNode(i)
+	}
+
+	//добавляем случайные ребра
+	for i := 0; i < numEdges; i++ {
+		//случайный узел - источник
+		sourseID := rand.Intn(numNode)
+
+		//случайный узел - назначени
+		destID := rand.Intn(numNode)
+
+		//случайный вес ребра
+		weight := rand.Intn(maxWeight) + 1
+
+		//добавляем ребро в граф
+		g.addEdgeWeight(sourseID, destID, weight)
+	}
+
+}
+
+// addEdgeWeight - получет индификаторы 2х узлов и вес ребра между ними
+func (g *Graph) addEdgeWeight(sourseID, destID, weight int) {
+
+	sourseNode := g.getNode(sourseID) // getNode - находит узел в графе по Id
+	destNodec := g.getNode(destID)    // создаём новое ребро
+	//добавляем ребро из исходного в назначенное
+
+	edge := &Edge{
+		dest:   destNodec,
+		weight: weight,
+	}
+	sourseNode.edges = append(sourseNode.edges, edge)
+}
+
+func main() {
+	g := Graph{}
+	/*	node1 := g.addNode(1)
+		node2 := g.addNode(2)
+		node3 := g.addNode(3)
+		node4 := g.addNode(4)
+		node1.addEdge(node2, 1)
+		node1.addEdge(node3, 2)
+		node2.addEdge(node4, 3)
+		node3.addEdge(node4, 4)
+	*/
+	g.addNodeWithEdge(1, 2, 1)
+	g.addNodeWithEdge(1, 3, 2)
+	g.addNodeWithEdge(2, 4, 3)
+	g.addNodeWithEdge(3, 4, 4)
+
+	g.Print()
+	g.printShortestPath(1, 4)
+
+	g.randomGraph(15, 40, 3)
+	g.Print()
+
+	g.printShortestPath(11, 6)
+	g.printShortestPath(2, 7)
+	g.printShortestPath(3, 9)
+	g.printShortestPath(14, 7)
+	g.printShortestPath(6, 10)
+	g.printShortestPath(13, 1)
+
 }
