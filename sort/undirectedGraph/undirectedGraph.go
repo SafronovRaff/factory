@@ -45,7 +45,7 @@ func (g *Graph) BFS(start int) []int {
 		queue = queue[1:]       // удаляем из очереди
 		res = append(res, node) // добавляем в список посещенных
 
-		//обработка соедей текущей вершины
+		//обработка соседей текущей вершины
 		for _, neighbor := range g.nodes[node] {
 			if !visited[neighbor] { // если сосед еще не посещен
 				visited[neighbor] = true        //помечаем как посещенный
