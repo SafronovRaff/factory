@@ -45,13 +45,31 @@ func main() {
 	//fmt.Println(LoveFunc(5,9))
 	//fmt.Println(Greet("Mark"))
 	//fmt.Println(FindEvenIndex([]int{10, -80, 10, 10, 15, 35, 20}))
-	//	fmt.Println(Summation(50))
+	//fmt.Println(Summation(50))
 	//fmt.Println(findMostOftenRepeated([]int{110, 12, 35, 35, 20, 12, 35}))
 	//fmt.Println(trimNegative(([]int{110, -12, 35, -35, 20, 12, -35})))
-	//	fmt.Println(trimLessAverage(([]int{53, -12, 70, -150, 99, 12, -35})))
-	//fmt.Println(insertArr([]int{1, 2, 3, 4, 5, 6, 7}, 8000, 2)) // добавление эл в произвольную позицию index
-	fmt.Println(removeArr([]int{1, 2, 3, 4, 5, 6, 7}, 3)) // удаление эл в поизицию index
+	//fmt.Println(trimLessAverage(([]int{53, -12, 70, -150, 99, 12, -35})))
+	//    fmt.Println(insertArr([]int{1, 2, 3, 4, 5, 6, 7}, 8000, 2)) // добавление эл в произвольную позицию index
+	//    fmt.Println(removeArr([]int{1, 2, 3, 4, 5, 6, 7}, 3)) // удаление эл в поизицию index
+	fmt.Println(MultiplicationTable(3))
+}
 
+func MultiplicationTable(size int) [][]int {
+	result := make([][]int, size)
+	for i := 0; i < size; i++ {
+		result[i] = make([]int, size)
+		for j := 0; j < size; j++ {
+			result[i][j] = (i + 1) * (j + 1)
+		}
+	}
+	return result
+	/* Создать таблицу умножения N×N размера, указанного в параметре.
+			Например, если дано size3:
+		1 2 3
+		2 4 6
+		3 6 9
+		Для данного примера возвращаемое значение должно быть:
+	[[1,2,3],[2,4,6],[3,6,9]]*/
 }
 
 func insertArr(list []int, el, index int) []int { // добавление эл в произвольную позицию index
