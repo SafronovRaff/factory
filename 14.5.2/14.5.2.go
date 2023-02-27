@@ -5,14 +5,15 @@ import (
 	"time"
 )
 
+// CacheEntry - содержит время установки значения и само значение
 type CacheEntry struct {
 	settledAt time.Time
 	value     interface{}
 }
 
+// InMemoryCache - структура содержащая время продолжительности хранения кэша и сам кэш
 type InMemoryCache struct {
-	//Code here
-	expireIn time.Duration
+	expireIn time.Duration //время хранения записей в кэше
 	cache    map[string]CacheEntry
 }
 
@@ -24,7 +25,7 @@ func NewInMemoryCache(expireIn time.Duration) *InMemoryCache {
 	}
 }
 
-// Set - сохраняет новую запись в кеше вместе с текущим временем
+// Set - сохраняет новую запись в кэше вместе с текущим временем
 func (c *InMemoryCache) Set(key string, value interface{}) {
 	//Устанавливаем новое значение в кэше с текущей меткой времени
 	c.cache[key] = CacheEntry{
@@ -33,9 +34,9 @@ func (c *InMemoryCache) Set(key string, value interface{}) {
 	}
 }
 
-// Get - возвращает значение из кеша если оно есть или время действия не истекло
+// Get - возвращает значение из кэша если оно есть или время действия не истекло
 func (c *InMemoryCache) Get(key string) interface{} {
-	// Получаем значение из кеша и проверяем, не истек ли срок действия
+	// Получаем значение из кэша и проверяем, не истек ли срок действия
 	entry, ok := c.cache[key]
 	if ok && time.Since(entry.settledAt) <= c.expireIn { // Since возвращает время, прошедшее с момента t.
 		return entry.value
