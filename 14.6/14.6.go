@@ -50,5 +50,27 @@ func main() {
 			result = append(result, v)
 		}
 	}
-	fmt.Println(result)
+
+	// тестовое
+	v := []int{3, 3, 4, 5, 8, 9, 10, 10, 15, 15}
+	repit(v)
+
+}
+
+// создаём пустую мапу и слайс для результата
+// итерация по входящему массиву с добавлением значения ключом мапы и значение мапы +1
+// итерация ключа и значения мапы
+// если значение = 1, то записываем ключ в слайс с результатом
+func repit(arr []int) {
+	dictionary := make(map[int]int)
+	result := make([]int, 0)
+	for _, v := range arr {
+		dictionary[v]++
+	}
+	for key, value := range dictionary {
+		if value == 1 {
+			result = append(result, key)
+		}
+	}
+	fmt.Print(result)
 }
