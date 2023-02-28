@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+const salt int = 1893574
 
 type hashmap struct {
 	hashMap map[uint64]string
@@ -22,11 +26,11 @@ func main() {
 	fmt.Println(hash)
 }
 
-// hashstr - хеш-функция возвращает хеш типа uint64 от строки, используя остаток от деления на 1000
+// hashstr - хеш-функция возвращает хеш типа uint64 от строки, используя остаток от деления на 1000 (по условию задачи)
 func hashstr(val string) uint64 {
 	res := 0
 	for i, v := range val {
-		res = ((i + int(v) + res) * 10000) / 1000
+		res = ((i + int(v) + res) * salt) / 1000
 	}
 	return uint64(res)
 }
