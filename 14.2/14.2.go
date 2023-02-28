@@ -11,10 +11,10 @@ type hashmap struct {
 }
 
 func main() {
-	/*
-		fmt.Println(hashstr("avav")) //1100110
-		fmt.Println(hashstr("vava")) //1291000
-	*/
+
+	// fmt.Println(hashstr("avav")) //1247902518561550
+	// fmt.Println(hashstr("vava")) //1517750106487008
+
 	hash := hashmap{}
 
 	hash.Set("Первый ключ", "первое значение ")
