@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"sync"
 	"time"
 )
 
@@ -34,16 +35,27 @@ func (u User) getActivityInfo() string {
 }
 
 func main() {
-
 	rand.Seed(time.Now().Unix())
-	users := generateUser(30)
-	for _, user := range users {
-		seveUserInfo(user)
+
+	//t := time.Now()
+	users := make(chan User)
+	go generateUser(30, users)
+
+	wg := &sync.WaitGroup{}
+	for user := range users {
+		wg.Add(1) //добавляем задачу
+		go seveUserInfo(user, wg)
 	}
+
+	wg.Wait()
+
+	//fmt.Println("Time elassed:", time.Since(t).String())
+
 }
 
 // seveUserInfo - создаёт фал и записывает в него логи пользователей
-func seveUserInfo(user User) error {
+func seveUserInfo(user User, wg *sync.WaitGroup) error {
+	//time.Sleep(time.Millisecond * 100)
 	fmt.Printf("writing file user ID: %d\n", user.id)
 
 	filename := fmt.Sprintf("logs/uid_%d.txt", user.id)
@@ -52,20 +64,24 @@ func seveUserInfo(user User) error {
 		return err
 	}
 	_, err = file.WriteString(user.getActivityInfo())
-	return err
+	if err != nil {
+		return err
+	}
+	wg.Done() // закрываем задачу
+	return nil
 }
 
 // generateUser - генерирует заданное количество пользователей
-func generateUser(count int) []User {
-	users := make([]User, count)
+func generateUser(count int, users chan User) {
+
 	for i := 0; i < count; i++ {
-		users[i] = User{
+		users <- User{
 			id:    i + 1,
 			email: fmt.Sprintf("user%d@google.com", i+1),
 			logs:  generateLogs(rand.Intn(50)), //  рандом до 50 записей
 		}
 	}
-	return users
+	close(users)
 }
 
 // generateUser - генерирует рандомное количество логов
