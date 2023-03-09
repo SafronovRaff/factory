@@ -1,5 +1,15 @@
 #Code optimization with Worker Pool
 
+
+| workerCount | Time                             |
+|-------------|----------------------------------|
+| 1           |DONE! Time Elapsed: 111.13 seconds|
+| 5           |DONE! Time Elapsed: 30.43 seconds |
+| 10          |DONE! Time Elapsed: 20.29 seconds |
+| 30          |DONE! Time Elapsed: 14.24 seconds |
+| 100         |DONE! Time Elapsed: 11.51 seconds |
+
+
 ````
 package main
 
@@ -88,21 +98,4 @@ logs := make([]logItem, count)
 
 	return logs
 }
-````
-
-
-workerCount := 1  ----------DONE! Time Elapsed: 111.13 seconds
-
-workerCount := 5  ----------DONE! Time Elapsed: 30.43 seconds
-
-workerCount := 10 ----------DONE! Time Elapsed: 20.29 seconds
-
-workerCount := 30 ----------DONE! Time Elapsed: 14.24 seconds
-
-workerCount := 100----------DONE! Time Elapsed: 11.51 seconds
-
-
-
-
-
 ````
