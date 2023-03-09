@@ -1,13 +1,13 @@
 #Code optimization with Worker Pool
 
 
-| workerCount | Time                             |
-|-------------|----------------------------------|
-| 1           |DONE! Time Elapsed: 111.13 seconds|
-| 5           |DONE! Time Elapsed: 30.43 seconds |
-| 10          |DONE! Time Elapsed: 20.29 seconds |
-| 30          |DONE! Time Elapsed: 14.24 seconds |
-| 100         |DONE! Time Elapsed: 11.51 seconds |
+| workerCount | Time           |
+|-------------|----------------|
+| 1           | 111.13 seconds |
+| 5           | 30.43 seconds  |
+| 10          | 20.29 seconds  |
+| 30          | 14.24 seconds  |
+| 100         | 11.51 seconds  |
 
 
 ````
