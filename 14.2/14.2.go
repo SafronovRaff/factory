@@ -35,7 +35,7 @@ func hashstr(val string) uint64 {
 	return uint64(res)
 }
 
-// Set - добовляет значение
+// Set - добавляет значение
 func (h *hashmap) Set(key, val string) {
 	//инициализируем мапу
 	if h.hashMap == nil {
