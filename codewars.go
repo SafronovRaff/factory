@@ -51,7 +51,15 @@ func main() {
 	//fmt.Println(trimLessAverage(([]int{53, -12, 70, -150, 99, 12, -35})))
 	//    fmt.Println(insertArr([]int{1, 2, 3, 4, 5, 6, 7}, 8000, 2)) // добавление эл в произвольную позицию index
 	//    fmt.Println(removeArr([]int{1, 2, 3, 4, 5, 6, 7}, 3)) // удаление эл в поизицию index
-	fmt.Println(MultiplicationTable(3))
+	//fmt.Println(MultiplicationTable(3))
+	fmt.Println(SliseExpand([]int{1, 2, 3, 4, 5, 6, 7}, 5))
+}
+
+func SliseExpand(a []int, i int) []int {
+	fmt.Println(a)
+	a = append(a[:i], append(make([]int, 3), a[i:]...)...)
+	return a
+	// вставить 3 элемента в 5 позицию слайса
 }
 
 func MultiplicationTable(size int) [][]int {
