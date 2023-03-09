@@ -9,8 +9,6 @@ import (
 	"time"
 )
 
-var actions = []string{"logged in", "logged out", "created record", "deleted record", "updated account"}
-
 type logItem struct {
 	action    string
 	timestamp time.Time
@@ -31,70 +29,77 @@ func (u User) getActivityInfo() string {
 	return output
 }
 
-func main() {
+var (
+	workerCount, result = 100, 100
+	actions             = []string{"logged in", "logged out", "created record", "deleted record", "updated account"}
+	startTime           = time.Now()
+	wg                  sync.WaitGroup
+)
+
+func init() {
 	rand.Seed(time.Now().Unix())
-	startTime := time.Now()
-	users := generateUsers(100) // генерируем 100 пользователей
-	var wg sync.WaitGroup
-	workerCount := 5             // количество гоутин
-	taskQueue := make(chan User) // канал для очереди задач
+}
+func main() {
+	jobs := make(chan int, result)
 
-	//запускаем функцию worker в горутинах
-	for i := 0; i < workerCount; i++ {
-		wg.Add(1) // добавляем 1 задачу
-		go worker(taskQueue, &wg)
-	}
-	//добавляем задачи в очередь задач
-	for _, user := range users {
-		taskQueue <- user
-	}
+	taskQueue := make(chan User, result) // канал для очереди задач
 
-	close(taskQueue)
+	generateUsers(result, jobs, taskQueue) // генерируем 100 пользователей
+
+	generationRes(result, jobs, &wg)
+
+	saveUserInfo(workerCount, taskQueue, &wg)
+
 	wg.Wait() // блокируем до тех пор, пока не выполним все горутины
 
 	fmt.Printf("DONE! Time Elapsed: %.2f seconds\n", time.Since(startTime).Seconds())
 }
 
-func worker(taskQueue chan User, wg *sync.WaitGroup) {
-	defer wg.Done() // закрываем задачу
-
-	for user := range taskQueue {
-		saveUserInfo(user)
+func generationRes(result int, jobs chan int, wg *sync.WaitGroup) {
+	for i := 0; i < result; i++ {
+		wg.Add(1) // добавляем 1 задачу
+		jobs <- i
 	}
-
 }
 
-func saveUserInfo(user User) {
-	fmt.Printf("WRITING FILE FOR UID %d\n", user.id)
+func saveUserInfo(workerCount int, taskQueue chan User, wg *sync.WaitGroup) {
+	for i := 0; i < workerCount; i++ {
+		go func() {
+			for user := range taskQueue {
+				fmt.Printf("WRITING FILE FOR UID %d\n", user.id)
+				filename := fmt.Sprintf("users/uid_%d.txt", user.id)
+				file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
+				if err != nil {
+					log.Fatal(err)
+				}
 
-	filename := fmt.Sprintf("users/uid_%d.txt", user.id)
-	file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
-	if err != nil {
-		log.Fatal(err)
+				file.WriteString(user.getActivityInfo())
+
+				time.Sleep(time.Second)
+				wg.Done()
+			}
+		}()
 	}
-
-	file.WriteString(user.getActivityInfo())
-
-	time.Sleep(time.Second)
-
 }
 
-func generateUsers(count int) []User {
-	users := make([]User, count)
+func generateUsers(count int, jobs chan int, taskQueue chan User) {
 
 	for i := 0; i < count; i++ {
-		users[i] = User{
-			id:    i + 1,
-			email: fmt.Sprintf("user%d@company.com", i+1),
-			logs:  generateLogs(rand.Intn(1000)),
-		}
-		fmt.Printf("generated user %d\n", i+1)
-		time.Sleep(time.Millisecond * 100)
+
+		go func() {
+			for i := range jobs {
+				taskQueue <- User{
+					id:    i + 1,
+					email: fmt.Sprintf("user%d@company.com", i+1),
+					logs:  generateLogs(rand.Intn(1000)),
+				}
+				fmt.Printf("generated user %d\n", i+1)
+				time.Sleep(time.Millisecond * 100)
+			}
+			close(taskQueue)
+		}()
 	}
-
-	return users
 }
-
 func generateLogs(count int) []logItem {
 	logs := make([]logItem, count)
 
