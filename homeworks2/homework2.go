@@ -38,7 +38,27 @@ var (
 
 func init() {
 	rand.Seed(time.Now().Unix())
+	preparationDB()
 }
+func preparationDB() {
+	//проверяем наличие папки для хранения данных, если нет, то создаём
+	if _, err := os.Stat("users"); os.IsNotExist(err) {
+		err = os.Mkdir("users", 0755)
+	}
+	// удаляем данные из папки перед запуском
+	files, err := os.ReadDir("users")
+	if err != nil {
+		fmt.Sprintf("Ошибка чтения директории")
+	}
+	for _, file := range files {
+		err = os.Remove("users/" + file.Name())
+		if err != nil {
+			fmt.Sprintf("Ошибка удаления файлов")
+		}
+	}
+
+}
+
 func main() {
 	jobs := make(chan int, result)
 
@@ -67,6 +87,7 @@ func saveUserInfo(workerCount int, taskQueue chan User, wg *sync.WaitGroup) {
 		go func() {
 			for user := range taskQueue {
 				fmt.Printf("WRITING FILE FOR UID %d\n", user.id)
+				//создаём файл
 				filename := fmt.Sprintf("users/uid_%d.txt", user.id)
 				file, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
 				if err != nil {
@@ -76,7 +97,8 @@ func saveUserInfo(workerCount int, taskQueue chan User, wg *sync.WaitGroup) {
 				file.WriteString(user.getActivityInfo())
 
 				time.Sleep(time.Second)
-				wg.Done()
+
+				wg.Done() // дождаться сохранения всех пользователей
 			}
 		}()
 	}
